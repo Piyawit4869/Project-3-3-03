@@ -27,7 +27,7 @@
             </div>
 
             <div class="row inner-menu-box">
-                <div class="col-3">
+                {{-- <div class="col-3">
                     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                         <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home"
                             role="tab" aria-controls="v-pills-home" aria-selected="true">All</a>
@@ -38,14 +38,13 @@
                             <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings"
                                 role="tab" aria-controls="v-pills-settings" aria-selected="false">ชาผลไม้</a>
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="col-9">
-                    <div class="tab-content" id="v-pills-tabContent">
-                        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
-                            aria-labelledby="v-pills-home-tab">
+                    <div class="tab-content" id="product-container">
+                        <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="v-pills-home-tab">
                             <div class="row">
-                                <div class="col-lg-4 col-md-6 special-grid drinks">
+                                {{-- <div class="col-lg-4 col-md-6 special-grid drinks">
                                     <div class="gallery-single fix">
                                         <img src="images/menu/menu-01.jpg" class="img-fluid" alt="Image">
                                         <div class="why-text">
@@ -61,9 +60,9 @@
                                         </div>
 
                                     </div>
-                                </div>
+                                </div> --}}
 
-                                <div class="col-lg-4 col-md-6 special-grid drinks">
+                                {{-- <div class="col-lg-4 col-md-6 special-grid drinks">
                                     <div class="gallery-single fix">
                                         <img src="images/menu/อัญชันลาเต้.jpg" class="img-fluid" alt="Image">
                                         <div class="why-text">
@@ -150,6 +149,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="col-lg-4 col-md-6 special-grid dinner">
                                     <div class="gallery-single fix">
                                         <img src="images/menu/ชาอัญชันน้ำผึ้งมะนาว.jpg" class="img-fluid" alt="Image">
@@ -170,11 +170,11 @@
                                             <h5> $15.79</h5>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
 
                         </div>
-                        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
+                        {{-- <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
                             aria-labelledby="v-pills-profile-tab">
                             <div class="row">
                                 <div class="col-lg-4 col-md-6 special-grid drinks">
@@ -210,9 +210,8 @@
                                     </div>
                                 </div>
                             </div>
-
-                        </div>
-                        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel"
+                        </div> --}}
+                        {{-- <div class="tab-pane fade" id="v-pills-messages" role="tabpanel"
                             aria-labelledby="v-pills-messages-tab">
                             <div class="row">
                                 <div class="col-lg-4 col-md-6 special-grid lunch">
@@ -249,8 +248,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel"
+                        </div> --}}
+                        {{-- <div class="tab-pane fade" id="v-pills-settings" role="tabpanel"
                             aria-labelledby="v-pills-settings-tab">
                             <div class="row">
                                 <div class="col-lg-4 col-md-6 special-grid dinner">
@@ -297,7 +296,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -370,7 +369,6 @@
             <button type="button" class="btn btn-warning btn-block">Clear Cart</button>
         </div>
     </div>
-
     <!-- Overlay -->
     <div id="cartOverlay" class="cart-overlay"></div> --}}
 
@@ -444,6 +442,38 @@
     <!-- End JavaScript Popup --> --}}
 
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch("./products.json")
+                .then((response) => response.json())
+                .then((products) => {
+                    const container = document.getElementById("product-container");
+                    products.forEach((product) => {
+                        const categories = product.category.join(" ");
+                        const productHTML = `
+                            <div class="col-lg-4 col-md-6 special-grid ${categories}">
+                                <div class="gallery-single fix">
+                                    <img src="${product.image}" class="img-fluid" alt="Image">
+                                    <div class="why-text">
+                                        <h2 style="color: white;">${product.name}</h2>
+                                        <p>${product.description}</p>
+                                        <h5> ราคา: ${product.price} ฿</h5>
+                                        <center>
+                                            <button class="button-cart">
+                                            <a href="#" onclick = "addToCart('${product.id}')"><b style="color: white">สั่งสินค้า</b></a>
+                                            </button>
+                                        </center>
+                                    </div>
+                                </div>
+                            </div>
+                            `;
+                        container.innerHTML += productHTML;
+                    });
+                })
+                .catch((error) =>
+                    console.error("Error loading the products:", error)
+                );
+        });
+
         // let cart = []  // let คือการประกาศค่าตัวแปร ที่ใช้มันแค่ตัวเดียว เรียกว่า Box Scope แต่การใช้ let cart = [] เมื่อ refresn web ข้อมูลจะหาย
         // Cart functionality
         let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -507,21 +537,20 @@
             let cartItemsHTML = cart
                 .map((product, index) => {
                     totalPrice += product.price;
-
                     return `
-          <div class="cart-item row mb-3">
-            <div class="col-md-3">
-              <img src="${product.image}" class="img-fluid" alt="${product.name}">
-            </div>
-            <div class="col-md-9">
-              <h5>${product.name}</h5>
-              <p><strong>Price :</strong> ${product.price} ฿</p>
-              <p><strong>Description: </strong> ${product.description}</p>
-              <button class="btn btn-danger btn-sm" onclick="removeFromCart(${index})">Remove</button>
-            </div>
-          </div>
-          <hr>
-          `;
+                        <div class="cart-item row mb-3">
+                            <div class="col-md-3">
+                            <img src="${product.image}" class="img-fluid" alt="${product.name}">
+                            </div>
+                            <div class="col-md-9">
+                            <h5>${product.name}</h5>
+                            <p><strong>Price :</strong> ${product.price} ฿</p>
+                            <p><strong>Description: </strong> ${product.description}</p>
+                            <button class="btn btn-danger btn-sm" onclick="removeFromCart(${index})">Remove</button>
+                            </div>
+                        </div>
+                        <hr>
+                    `;
                 })
                 .join("");
 
@@ -573,6 +602,139 @@
                 timer: 1500,
             });
             $("#cartModal").modal("hide");
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const loggedInUser = localStorage.getItem("loggedInUser");
+            if (loggedInUser) {
+                const usersJson = JSON.parse(localStorage.getItem("users")) || [];
+                const user = usersJson.find((u) => u.email === loggedInUser);
+                if (user) {
+                    const loginLink = document.getElementById("login-link");
+                    const coinBalance = user.coins || 0; // If no coins, set to 0
+                    const pointBalance = user.points || 0; // If no coins, set to 0
+                    // Change login button to display name and coins
+                    loginLink.innerHTML =
+                        `
+          <a href="#" data-toggle="modal" data-target="#userProfileModal">Welcome back, ${user.name}, Coin:${coinBalance}</a>`;
+
+                    // Populate the profile modal with user information
+                    document.getElementById("profile-name").innerText = user.name;
+                    document.getElementById("profile-email").innerText = user.email;
+                    document.getElementById("profile-coins").innerText = coinBalance;
+                    // Display current coins
+                    document.getElementById("profile-points").innerText =
+                        pointBalance; // Display current point
+                }
+            }
+        });
+
+        // Checkout function
+        function checkout() {
+            const loggedInUser = localStorage.getItem("loggedInUser");
+
+            if (!loggedInUser) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Not Logged In",
+                    text: "Please log in to complete your purchase.",
+                });
+                return;
+            }
+
+            const usersJson = JSON.parse(localStorage.getItem("users")) || [];
+            const user = usersJson.find((u) => u.email === loggedInUser);
+            const totalPrice = cart.reduce((sum, item) => sum + item.price, 0);
+
+            if (user) {
+                if (user.coins >= totalPrice) {
+                    // Deduct total price from user's coins
+                    user.coins -= totalPrice;
+
+                    // Calculate points earned (1 point per 100 units of total price)
+                    const pointsEarned = Math.floor(totalPrice / 100);
+                    user.points = (user.points || 0) + pointsEarned;
+
+                    localStorage.setItem("users", JSON.stringify(usersJson));
+
+                    Swal.fire({
+                        icon: "success",
+                        title: "Purchase Successful",
+                        text: `Your purchase was successful. You spent ${totalPrice.toFixed(2)} ฿ and earned ${pointsEarned} points.`,
+                        showConfirmButton: false,
+                        timer: 1500,
+                    }).then(() => {
+                        // Clear cart
+                        cart = [];
+                        localStorage.setItem("cart", JSON.stringify(cart));
+                        updateCart();
+
+                        // Update user's coin balance and points in the modal and login link
+                        document.getElementById("profile-coins").innerText = user.coins;
+
+                        // Close the cart modal after successful purchase
+                        $("#cartModal").modal("hide");
+                    });
+                } else {
+                    // If not enough coins, show error and open the profile modal
+                    Swal.fire({
+                        icon: "error",
+                        title: "Insufficient Coins",
+                        text: `You need more coins to complete this purchase. Please top up your balance.`,
+                    }).then(() => {
+                        // Open the user profile modal for topping up coins
+                        $("#userProfileModal").modal("show");
+                    });
+                }
+            }
+        }
+
+        function handleLogout() {
+            localStorage.removeItem("loggedInUser");
+            Swal.fire({
+                icon: "success",
+                title: "Logged Out",
+                text: "You have been logged out.",
+                showConfirmButton: false,
+                timer: 1500,
+            }).then(() => {
+                window.location.reload(); // Reload the page to show the login button again
+            });
+        }
+
+        function topUpCoins() {
+            const topUpAmount = parseInt(
+                document.getElementById("top-up-amount").value);
+            const loggedInUser = localStorage.getItem("loggedInUser");
+
+            if (topUpAmount < 1 || topUpAmount > 1000) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Invalid Amount",
+                    text: "Please enter a valid amount between 1 and 1000.",
+                });
+                return;
+            }
+            const usersJson = JSON.parse(localStorage.getItem("users")) || [];
+            const user = usersJson.find((u) => u.email === loggedInUser);
+            if (user) {
+                // Add the top-up amount to the user's existing coins
+                user.coins = (user.coins || 0) + topUpAmount;
+                // Update localStorage
+                localStorage.setItem("users", JSON.stringify(usersJson));
+                // Update the coin display in the modal and header
+                document.getElementById("profile-coins").innerText = user.coins;
+                const loginLink = document.getElementById("login-link");
+                loginLink.innerHTML =
+                    `
+        <a href="#" data-toggle="modal" data-target="#userProfileModal">Welcome back, ${user.name}, Coin: ${user.coins}</a>`;
+
+                Swal.fire({
+                    icon: "success",
+                    title: "Top Up Successful",
+                    text: `You have successfully topped up ${topUpAmount} coins.`,
+                });
+            }
         }
     </script>
 
