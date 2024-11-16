@@ -19,12 +19,12 @@
                                             <th>Total Price</th>
                                             <th>Final Price</th>
                                             <th>Item</th>
-                                            {{-- <th>Images</th>
-                                        <th>Price</th>
-                                        <th>Description</th>
-                                        <th>Created_at</th>
-                                        <th>Updated_at</th>
-                                        <th>Actions</th> --}}
+                                            <th>Created_at</th>
+                                            {{-- <th></th> --}}
+                                            {{-- <th>Description</th>
+                                            <th>Created_at</th>
+                                            <th>Updated_at</th>
+                                            <th>Actions</th> --}}
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -40,10 +40,10 @@
                                                         </div>
                                                     @endforeach
                                                 </td>
-                                                {{-- <td><img src=""></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                                {{-- <td><img src=""></td> --}}
+                                                <td>{{ $order->created_at }}</td>
+                                                {{-- <td>{{ $order->updated_at }}</td> --}}
+                                                {{-- <td></td>
                                                 <td></td> --}}
                                             </tr>
                                         @endforeach

@@ -83,6 +83,14 @@ Route::get('shop/order', [OrderController::class, 'order'])->name('shop.order');
 // การสั่งซื้อสินค้า ส่งข้อมูลเข้า Database
 Route::post('/order', [OrderController::class, 'store'])->name('order.store');
 
+//เมนู Gallery
+Route::get('admin/gallery/index', [GalleryController::class, 'index'])->name('g.index');
+Route::get('admin/gallery/create',[GalleryController::class,'create'])->name('g.create');
+Route::post('admin/gallery/insert',[GalleryController::class, 'insert']);
+Route::get('admin/gallery/edit/{id}',[GalleryController::class, 'edit'])->name('g.edit');
+Route::post('admin/gallery/update/{id}',[GalleryController::class, 'update']);
+Route::get('admin/gallery/delete/{id}',[GalleryController::class, 'delete']);
+
 // ส่วนของหน้า page
 Route::get('page/index', [IndexController::class, 'index'])->name('page.index');
 Route::get('page/menu', [MenuController::class, 'menu'])->name('page.menu');
