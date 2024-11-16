@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('order_item', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('order_id')->constrained()->onDelete('cascade');
-            $table->string('name');
-            $table->string('category');
-            $table->decimal('price', 8, 2);
-            $table->string('image');
-            $table->timestamps();
+            $table->id(); // Primary key
+            $table->foreignId('order_id')->constrained()->onDelete('cascade'); // Foreign key จากตาราง orders
+            $table->string('name'); // ชื่อสินค้า
+            $table->string('category'); // หมวดหมู่สินค้า
+            $table->decimal('price', 10, 2); // ราคาสินค้า
+            $table->string('image'); // URL ของภาพสินค้า
+            $table->timestamps(); // เวลาที่สร้างและอัปเดต
         });
     }
 

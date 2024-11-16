@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ListController;
 use App\Http\Controllers\ProfileController;
 
 // ส่วนของ Shop
@@ -72,12 +73,15 @@ Route::get('admin/product/edit/{id}',[ProductController::class, 'edit'])->name('
 Route::post('admin/product/update/{id}',[ProductController::class, 'update']);
 Route::get('admin/product/delete/{id}',[ProductController::class, 'delete']);
 
+//เมนู List
+Route::get('admin/list/index',[ListController::class, 'index'])->name('l.index');
+
 // ส่วนของหน้า Shop
 Route::get('shop/goods', [GoodsController::class, 'goods'])->name('shop.goods');
 Route::get('shop/detail', [DetailController::class, 'detail'])->name('shop.detail');
 Route::get('shop/order', [OrderController::class, 'order'])->name('shop.order');
 // การสั่งซื้อสินค้า ส่งข้อมูลเข้า Database
-
+Route::post('/order', [OrderController::class, 'store'])->name('order.store');
 
 // ส่วนของหน้า page
 Route::get('page/index', [IndexController::class, 'index'])->name('page.index');

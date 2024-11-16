@@ -27,7 +27,7 @@
             </div>
 
             <div class="row inner-menu-box">
-                {{-- <div class="col-3">
+                <div class="col-3">
                     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                         <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home"
                             role="tab" aria-controls="v-pills-home" aria-selected="true">All</a>
@@ -38,13 +38,13 @@
                             <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings"
                                 role="tab" aria-controls="v-pills-settings" aria-selected="false">ชาผลไม้</a>
                     </div>
-                </div> --}}
+                </div>
 
                 <div class="col-9">
-                    <div class="tab-content" id="product-container">
-                        <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                    <div class="tab-content" id="v-pills-tabContent">
+                        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                             <div class="row">
-                                {{-- <div class="col-lg-4 col-md-6 special-grid drinks">
+                                <div class="col-lg-4 col-md-6 special-grid drinks">
                                     <div class="gallery-single fix">
                                         <img src="images/menu/menu-01.jpg" class="img-fluid" alt="Image">
                                         <div class="why-text">
@@ -60,9 +60,9 @@
                                         </div>
 
                                     </div>
-                                </div> --}}
+                                </div>
 
-                                {{-- <div class="col-lg-4 col-md-6 special-grid drinks">
+                                <div class="col-lg-4 col-md-6 special-grid drinks">
                                     <div class="gallery-single fix">
                                         <img src="images/menu/อัญชันลาเต้.jpg" class="img-fluid" alt="Image">
                                         <div class="why-text">
@@ -170,11 +170,11 @@
                                             <h5> $15.79</h5>
                                         </div>
                                     </div>
-                                </div> --}}
+                                </div>
                             </div>
 
                         </div>
-                        {{-- <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
+                        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
                             aria-labelledby="v-pills-profile-tab">
                             <div class="row">
                                 <div class="col-lg-4 col-md-6 special-grid drinks">
@@ -210,8 +210,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> --}}
-                        {{-- <div class="tab-pane fade" id="v-pills-messages" role="tabpanel"
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel"
                             aria-labelledby="v-pills-messages-tab">
                             <div class="row">
                                 <div class="col-lg-4 col-md-6 special-grid lunch">
@@ -248,8 +248,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> --}}
-                        {{-- <div class="tab-pane fade" id="v-pills-settings" role="tabpanel"
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel"
                             aria-labelledby="v-pills-settings-tab">
                             <div class="row">
                                 <div class="col-lg-4 col-md-6 special-grid dinner">
@@ -296,7 +296,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
                     </div>
                 </div>
             </div>

@@ -39,7 +39,6 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
             const cartItemsDiv = document.getElementById("cartItems");
             const totalPriceSpan = document.getElementById("totalPrice");
             const finalPriceSpan = document.getElementById("finalPrice");
@@ -49,40 +48,40 @@
             function renderCart() {
                 cartItemsDiv.innerHTML = "";
                 cart.forEach((item, index) => {
-                    const cartItemHTML = `
-                        <div class="flex gap-4 bg-white rounded-lg shadow-md justify-between align-content-between">
-                            <div class="flex gap-4 items-center">
-                                <div class="w-400 h-40 shrink-0">
-                                    <img src="${item.image}" class="w-full h-full object-contain rounded-full" />
-                                </div>
-                            </div>
-
-                            <div class="flex gap-4 items-center">
-                                <div class="flex flex-col justify-center">
-                                    <h3 class="text-base font-bold text-gray-800">${item.name}</h3>
-                                </div>
-                            </div>
-
-                            <div class="flex gap-4 items-center">
-                                <div class="flex flex-col justify-center">
-                                    <h3 class="text-base font-bold text-gray-800">${item.category}</h3>
-                                </div>
-                            </div>
-
-                            <div class="flex gap-4 items-center">
-                                <div class="flex flex-col justify-center">
-                                    <h3 class="text-base font-bold text-gray-800">${item.price}</h3>
-                                </div>
-                            </div>
-
-                            <div class="flex flex-col justify-center items-end">
-                                <button class="mt-2 mr-10 text-sm bg-red-500 text-white px-4 py-2 rounded-md remove-item-btn" data-index="${index}">
-                                    ลบสินค้า
-                                </button>
+                    const cartItemHTML =
+                        `<div class="flex gap-4 bg-white rounded-lg shadow-md justify-between align-content-between">
+                        <div class="flex gap-4 items-center">
+                            <div class="w-400 h-40 shrink-0">
+                                <img src="${item.image}" class="w-full h-full object-contain rounded-full" />
                             </div>
                         </div>
-                        <br>
-                    `;
+
+                        <div class="flex gap-4 items-center">
+                            <div class="flex flex-col justify-center">
+                                <h3 class="text-base font-bold text-gray-800">${item.name}</h3>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4 items-center">
+                            <div class="flex flex-col justify-center">
+                                <h3 class="text-base font-bold text-gray-800">${item.category}</h3>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4 items-center">
+                            <div class="flex flex-col justify-center">
+                                <h3 class="text-base font-bold text-gray-800">${item.price}</h3>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col justify-center items-end">
+                            <button class="mt-2 mr-10 text-sm bg-red-500 text-white px-4 py-2 rounded-md remove-item-btn" data-index="${index}">
+                                ลบสินค้า
+                            </button>
+                        </div>
+                    </div>
+                    <br>
+                `;
                     cartItemsDiv.innerHTML += cartItemHTML;
                 });
 
@@ -103,8 +102,30 @@
             });
 
             document.getElementById("confirmOrder").addEventListener("click", function() {
-                alert("สั่งซื้อสำเร็จ!");
-                localStorage.removeItem("cart");
+                const orderData = {
+                    total_price: totalPrice,
+                    final_price: totalPrice + 0 - 5, // ค่าส่ง, ส่วนลด
+                    cart_items: cart
+                };
+
+                // ส่งข้อมูลไปยังเซิร์ฟเวอร์
+                fetch('{{ route('order.store') }}', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: JSON.stringify(orderData)
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        alert(data.message); // แสดงข้อความเมื่อสั่งซื้อสำเร็จ
+                        localStorage.removeItem("cart"); // ลบข้อมูลจาก localStorage
+                        window.location.href = "/"; // เปลี่ยนหน้าไปยังหน้าอื่นหลังจากสั่งซื้อ
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
             });
         });
     </script>
