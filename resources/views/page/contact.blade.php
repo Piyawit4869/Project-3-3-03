@@ -34,7 +34,11 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <form id="contactForm">
+                    @if (session('success'))
+                        <p style="color: green;">{{ session('success') }}</p>
+                    @endif
+                    <form method="POST" action="{{ url('admin/contact/insert') }}">
+                        @csrf
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -45,28 +49,15 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input type="text" placeholder="หัวข้อ" id="email" class="form-control"
-                                        name="name" required data-error="Please enter your email">
+                                    <input type="text" placeholder="หัวข้อ" id="subject" class="form-control"
+                                        name="subject" required data-error="Please enter your subject">
                                     <div class="help-block with-errors"></div>
                                 </div>
                             </div>
-                            <!-- <div class="col-md-12">
-                            <div class="form-group">
-                                <select class="custom-select d-block form-control" id="guest" required data-error="Please Select Person">
-                                  <option disabled selected>Please Select Person*</option>
-                                  <option value="1">1</option>
-                                  <option value="2">2</option>
-                                  <option value="3">3</option>
-                                  <option value="4">4</option>
-                                  <option value="5">5</option>
-                                </select>
-                                <div class="help-block with-errors"></div>
-                            </div>
-                        </div> -->
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <textarea class="form-control" id="message" placeholder="ข้อความ" rows="4" data-error="Write your message"
-                                        required></textarea>
+                                    <textarea class="form-control" id="message" name="message" placeholder="ข้อความ" rows="4"
+                                        data-error="Write your message" required></textarea>
                                     <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="submit-button text-center">

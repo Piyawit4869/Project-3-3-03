@@ -1,7 +1,7 @@
 <header class="top-navbar">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="{{ route('dashboard') }}">
                 <img style="max-width: 100%; height: auto; width: 80px;" src="{{ asset('page/images/logo.jpg') }}" alt="" />
             </a>
             <div style="font-size: 20px; font-weight: bold;">MEEKHAM SOOK</div>

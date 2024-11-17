@@ -91,6 +91,18 @@ Route::get('admin/gallery/edit/{id}',[GalleryController::class, 'edit'])->name('
 Route::post('admin/gallery/update/{id}',[GalleryController::class, 'update']);
 Route::get('admin/gallery/delete/{id}',[GalleryController::class, 'delete']);
 
+//เมนู Promotion
+Route::get('admin/promote/index', [PromoteController::class, 'index'])->name('pm.index');
+Route::get('admin/promote/create',[PromoteController::class,'create'])->name('pm.create');
+Route::post('admin/promote/insert',[PromoteController::class, 'insert']);
+Route::get('admin/promote/edit/{id}',[PromoteController::class, 'edit'])->name('pm.edit');
+Route::post('admin/promote/update/{id}',[PromoteController::class, 'update']);
+Route::get('admin/promote/delete/{id}',[PromoteController::class, 'delete']);
+
+//เมนู Contact
+Route::get('admin/contact/index', [ContactController::class, 'index'])->name('con.index');
+Route::post('admin/contact/insert',[ContactController::class, 'insert']);
+
 // ส่วนของหน้า page
 Route::get('page/index', [IndexController::class, 'index'])->name('page.index');
 Route::get('page/menu', [MenuController::class, 'menu'])->name('page.menu');

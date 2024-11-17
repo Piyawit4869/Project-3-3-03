@@ -18,7 +18,8 @@
                                             <th>No</th>
                                             <th>Total Price</th>
                                             <th>Final Price</th>
-                                            <th>Item</th>
+                                            <th>name</th>
+                                            <th>price</th>
                                             <th>Created_at</th>
                                             {{-- <th></th> --}}
                                             {{-- <th>Description</th>
@@ -33,13 +34,24 @@
                                                 <td>{{ $order->id }}</td>
                                                 <td>{{ $order->total_price }}</td>
                                                 <td>{{ $order->final_price }}</td>
-                                                <td>
-                                                    @foreach ($order->items as $item)
+
+
+                                                    <td>
+                                                        @foreach ($order->items as $item)
                                                         <div>
-                                                            <strong>{{ $item['name'] }}</strong> - {{ $item['price'] }} THB
+                                                            <strong>{{ $item['name'] }}</strong>
                                                         </div>
-                                                    @endforeach
-                                                </td>
+                                                        @endforeach
+                                                    </td>
+                                                    <td>
+                                                        @foreach ($order->items as $item)
+                                                        <div>
+                                                            <strong>{{ $item['price'] }}</strong>
+                                                        </div>
+                                                        @endforeach
+                                                    </td>
+
+
                                                 {{-- <td><img src=""></td> --}}
                                                 <td>{{ $order->created_at }}</td>
                                                 {{-- <td>{{ $order->updated_at }}</td> --}}

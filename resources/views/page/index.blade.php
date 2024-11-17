@@ -6,7 +6,7 @@
     <div id="slides" class="cover-slides">
         <ul class="slides-container">
             <li class="text-left">
-                <img src="images/slider-00.jpg" alt="">
+                <img src="{{ asset('page/images/slider-00.jpg') }}" alt="">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
@@ -18,7 +18,7 @@
                 </div>
             </li>
             <li class="text-left">
-                <img src="images/slider-11.jpg" alt="">
+                <img src="{{ asset('page/images/slider-11.jpg') }}" alt="">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
@@ -30,7 +30,7 @@
                 </div>
             </li>
             <li class="text-left">
-                <img src="images/slider-22.jpg" alt="">
+                <img src="{{ asset('page/images/slider-22.jpg') }}" alt="">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
@@ -73,7 +73,7 @@
                     </div>
                 </div>
                 <div class=" col-lg-6 col-md-6 col-sm-12">
-                    <img src="images/about.jpg" alt="" class="img-fluid">
+                    <img src="{{ asset('page/images/about.jpg') }}" alt="" class="img-fluid">
                 </div>
             </div>
         </div>
@@ -112,7 +112,7 @@
                         <div class="col-md-4 col-sm-6">
                             <div class="our-team">
                                 <div class="pic">
-                                    <img src="images/menu-01.jpg">
+                                    <img src="{{ asset('page/images/menu-01.jpg') }}">
                                 </div>
                                 <div class="team-content">
                                     <h3 class="title">ชานมมีความสุข</h3>
@@ -124,7 +124,7 @@
                         <div class="col-md-4 col-sm-6">
                             <div class="our-team">
                                 <div class="pic">
-                                    <img src="images/menu-02.jpg">
+                                    <img src="{{ asset('page/images/menu-02.jpg') }}">
                                 </div>
                                 <div class="team-content">
                                     <h3 class="title">นมสดโคฟุกุ</h3>
@@ -136,7 +136,7 @@
                         <div class="col-md-4 col-sm-6">
                             <div class="our-team">
                                 <div class="pic">
-                                    <img src="images/menu-03.jpg">
+                                    <img src="{{ asset('page/images/menu-03.jpg') }}">
                                 </div>
                                 <div class="team-content">
                                     <h3 class="title">ชาเขียวมัทฉะชิอาวาเสะ</h3>
